@@ -36,7 +36,7 @@
 
 * 영화 대표코드, 영화명, 해당일 누적관객수를 기록하였고, 최근 50주간 데이터 중에 주간 박스오피스 TOP10 데이터를 모은 결과 186편의 영화를 찾을 수 있었다.
 
-* ![](C:\Users\student\Desktop\TIL\python\project\boxoffice.PNG)
+* ![](C:\Users\student\Desktop\TIL\python\project\image\boxoffice.PNG)
 
 * [boxoffice.csv](./boxoffice.csv)
 
@@ -58,7 +58,7 @@
 
 * boxoffice.csv에 저장된 `영화 대표코드`를 불러와 186편의 영화 정보인 영화명, 관람등급, 개봉연도, 상영시간, 장르, 감독명의 데이터를 모아 정리함
 
-* ![](C:\Users\student\Desktop\TIL\python\project\movie.PNG)
+* ![](C:\Users\student\Desktop\TIL\python\project\image\movie.PNG)
 
 * [movie.csv](./movie.csv)
 
@@ -68,6 +68,6 @@
 
 * movie.csv에 저장된 `감독명`을 불러와 영화인 코드, 영화인명, 분야, 필모리스트의 데이터를 모아 정리함
 * 감독 정보가 없거나 동명이인을 처리하기 위해 조건문을 사용
-* ![](C:\Users\student\Desktop\TIL\python\project\director.PNG)
+* ![](C:\Users\student\Desktop\TIL\python\project\image\director.PNG)
 * [director.csv](director.csv)
 
