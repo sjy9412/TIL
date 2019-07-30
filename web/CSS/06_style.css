@@ -1,0 +1,23 @@
+div {
+  width: 100px;
+  height: 100px;
+  background-color: #ca9648;
+  text-align: center;
+  line-height: 100px;
+}
+
+.inline {
+  display: inline;
+}
+
+.block-inline {
+  display: inline-block;
+}
+
+.none {
+  display: none;
+}
+
+.hidden {
+  visibility: hidden;
+}

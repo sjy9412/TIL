@@ -1,0 +1,26 @@
+div {
+  width: 100px;
+  height: 100px;
+  background-color: #48ca9f;
+  text-align: center;
+  line-height: 100px;
+}
+
+/* 인라인은 아님 */
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+.back {
+  background-color: orange;
+  width: 300px;
+}
+
+/* float의 영향을 받지 않고 싶을 때 */
+.clear{
+  clear: both;
+}

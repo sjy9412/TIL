@@ -1,0 +1,35 @@
+ol, ol li {
+  font-size: 2rem;
+}
+
+ul, ul li {
+  font-size: 2em;
+}
+
+.vw {
+  font-size: 10vw;
+}
+
+.vh {
+  font-size: 10vh;
+}
+
+.div-vw {
+  width: 10vw;
+  height: 10vw;
+  background-color: rgb(94, 153, 121);
+}
+
+/* rgba에서 a 값 -> 투명도 */
+.div-vh {
+  width: 10vh;
+  height: 10vh;
+  background-color: rgba(0,0,255,0.5);
+}
+
+/* rgb값을 16진수로 표현 */
+.div-vmin {
+  width: 10vmin;
+  height: 10vmin;
+  background-color: #0000ff;
+}
