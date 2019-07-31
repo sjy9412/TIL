@@ -115,7 +115,7 @@
 
    * `class="ancestor"`인 부모 클래스 안의 모든 `li`태그에 적용
 
-### 3. Unit
+### 03. Unit
 
 1. rem
 
@@ -151,7 +151,7 @@
 
 
 
-### 4. Box model
+### 04. Box model
 
 ![](C:\Users\student\Desktop\TIL\web\CSS\box_model.PNG)
 
@@ -228,5 +228,60 @@
 
      * 내부 여백이 위 아래로 30px만큼 생김
 
-### 5. Display
+### 05. Display
 
+1. Block
+
+   * 기본적으로 가질 수 있는 영역의 100% 차지
+
+   * h1~h6, p, div, form, table, ol, ul, li
+
+   * 가로 정렬
+
+     ```css
+     /* 왼쪽 정렬 */
+     .ml-auto {
+         margin-left: auto;
+     }
+     
+     /* 가운데 정렬 */
+     /* 상하 / 좌우 */
+     .mx-auto {
+         margin: 0 auto;
+     }
+     ```
+
+2. Inline
+
+   * content 영역만큼 너비를 가짐 (내용 없이 존재할 수 없음, width나 height 적용 불가)
+
+   * margin을 가지고 있지 않음
+   * span 태그는 inline 중 가장 기본적인 요소
+   * span, input, a, img
+
+3. Inline-block
+
+   * block 속성 (width, height 적용) + inline 속성 (margin이 사라짐)
+
+4. None
+
+   * 공간이 사라짐
+
+5. Visibility: hidden
+
+   * 입력된 값은 없어지지만 공간은 남아있음
+
+
+
+### 06. Position
+
+1. Static
+   * 기본이 되는 위치
+2. Absolute
+   * 부모 혹은 조상요소를 기준으로 위치 ( 가까운 조상 중 static이 아닌 요소)
+   * 만약 모든 부모가 static인 경우 static 값에 기준
+   * 부모가 static이 아닌 경우 해당 부모가 기준(부모의 위치가 바뀌면 따라감)
+3. Relative
+   * 자기가 원래 있어야할 위치(static)을 기준으로 이동
+4. Fixed
+   * 브라우저에 따라 위치가 변경되어 고정되어 보임
