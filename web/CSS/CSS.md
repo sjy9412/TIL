@@ -153,7 +153,7 @@
 
 ### 04. Box model
 
-![](C:\Users\student\Desktop\TIL\web\CSS\box_model.PNG)
+![](box_model.PNG)
 
 1. Margin
 
@@ -215,7 +215,7 @@
 
 3. Padding
 
-   * 테두리 안쪽 내부 여백
+   * 테두리 안쪽 *내부* 여백
 
    * 요소에 적용된 배경의 컬러, 이미지는 패딩까지 적용
 
