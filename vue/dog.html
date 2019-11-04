@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <button v-on:click="getDogImage()">댕댕이</button>
+    <button v-on:click="getCatImage()">고양이</button>
+    <p>{{count}}</p>
+    <img v-for="image in imageUrl" v-bind:src="image" width="200px" height="200px">
+  </div>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        imageUrl: [],
+        count: 0
+      },
+      methods: {
+        getDogImage: function () {
+          axios.get('https://dog.ceo/api/breeds/image/random')
+            .then(response => {
+              this.imageUrl.push(response.data.message)
+              this.count++
+            })
+        },
+        getCatImage: function () {
+          axios.get('https://api.thecatapi.com/v1/images/search')
+            .then(response => { // function 키워드를 쓰면 this가 window로 간다! 
+              console.log(this) // arrow function을 써야 바로 위에 함수에서 호출된 값이 넘어옴
+              this.imageUrl.push(response.data[0].url)
+              this.count++
+            })
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
