@@ -9,11 +9,19 @@
   <style>
   .completed {
     color: gray;
+    text-decoration-line: line-through;
   }
+  .blue {
+    color: rgb(19, 157, 248)
+  }
+  .red {
+    color:rgb(221, 44, 97)
+  }
+
   </style>
 </head>
 <body>
-  <div id="app">
+  <div style="align-items: center; text-align:center" id="app">
     <!--
       디렉티브
       v-for : 반복문
@@ -21,35 +29,73 @@
       같이 작성을 하게 되면, 매 반복에 if를 체크
     -->
     <img v-bind:src="logo"><br>
+    <!-- class는 true, false -->
+    <!-- <h2 :class="{blue: isBlue, red: !isBlue}">TODO List</h2> -->
+    <!-- style은 value 값 -->
+    <h2 :style="{color: color, 'font-size': font}">TODO List</h2>
+    <button style="margin-right:4px" @click="allCompleted">Complete</button><button @click="clear">Clear</button><br>
     <input type="text" v-model="newTodo" v-on:keyup.enter="addTodo"> <br>
+    <select name="" v-model="status">
+      <option value="all">모두 보기</option>
+      <option value="active">해야할 일</option>
+      <option value="complete">완료</option>
+    </select>
+    <br>
+    <!--
     <li v-for="todo in todos" v-if="!todo.completed" v-on:click="toggleCompleted(todo)">
+    -->
+    <div style="display:inline-block; text-align:left">
+        <li style="list-style: none;" v-for="todo in todosByStatus" :class="{completed: todo.completed}" :key="todo.id">
+            <input type="checkbox" v-model="todo.completed">
       {{ todo.content }}
     </li>
-    <li v-else v-on:click="toggleCompleted(todo)" class="completed"><del> {{ todo.content }}</del></li>
+  </div>
+    <!--
+    <li v-else v-on:click="toggleCompleted(todo)" class="completed">
+    -->
+    <!-- <li v-else :class="{completed: todo.completed, true: true, false: false}">
+    <input type="checkbox" v-model="todo.completed">
+    <del> {{ todo.content }}</del></li> -->
   </div>
   <script>
+    const todoStorage = {
+      fetch() { // 가져오는 작업(JSON -> object 리턴)
+        return JSON.parse(localStorage.getItem('vue-todo')  || '[]')
+      },
+      set(todos) { // 로컬스토리지에 저장하는 작업 (object -> JSON)
+        localStorage.setItem('vue-todo', JSON.stringify(todos))
+      }
+    }
     const app = new Vue({
       el: '#app',
       data: {
+        color: 'pink',
+        font: '30px',
+        isBlue: true,
+        status: 'all', // 'active'(false), 'completed'(ture)
         newTodo: '',
         logo: 'data:image/jpeg;base64,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', 
         todos: [
-          {
-            content: '수업 열심히 듣기',
-            completed: true
-            },
-          {
-            content: '퇴근 하기',
-            completed: false
-            },
-          {
-            content: '밥 먹기',
-            completed: false
-            },
-          {
-            content: '롤하기',
-            completed: true
-            },
+          // { 
+          //   id: 1,
+          //   content: '수업 열심히 듣기',
+          //   completed: true
+          //   },
+          // {
+          //   id: 2,
+          //   content: '퇴근 하기',
+          //   completed: false
+          //   },
+          // {
+          //   id: 3,
+          //   content: '밥 먹기',
+          //   completed: false
+          //   },
+          // {
+          //   id: 4,
+          //   content: '롤하기',
+          //   completed: true
+          //   },
         ]
       },
       methods:{
@@ -58,11 +104,50 @@
         },
         addTodo: function() {
           this.todos.push({
+            id: Date.now(),
             content: this.newTodo,
             completed: false
           })
           this.newTodo = ''
+        },
+        allCompleted: function() {
+          this.todos.forEach(todo => {
+            todo.completed = true
+          })
+        },
+        clear() {
+          this.todos = this.todos.filter(todo => {
+            console.log(todo.completed)
+            return todo.completed === false
+          })
         }
+      },
+      computed: {
+        todosByStatus() {
+          // this.status 1) 'active'
+          // 2) complete
+          // 3) else all
+          if (this.status === 'active') {
+            return this.todos.filter(todo => !todo.completed)
+          } else if (this.status === 'complete') {
+            return this.todos.filter(todo => todo.completed)
+          } else {
+            return this.todos // all
+          }
+        }
+      },
+      watch: { // 특정 data의 변경을 추적, 반응
+        todos: { // todos를 추적
+          handler: function() {
+            console.log('변경')
+            todoStorage.set(this.todos)
+          },
+          deep: true // todos 자체 변경 뿐만 아니라 요소들의 변경까지
+        },
+      },
+      mounted: function() { // vue 시작되는 시점
+        console.log('아침')
+        this.todos = todoStorage.fetch()
       }
     })
   </script>
