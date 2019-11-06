@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id= "app">
+    <!-- 앞뒤 공백을 제거하기 위해서 사용 -->
+    <input v-model.trim="message" type="text"> <br>
+    <!-- 그냥 사용하면 문자열, .number하면 형변환 해준다 -->
+    <input v-model.number="number" type="number"> <br>
+    <select v-model="jiwoo.pokemon">
+      <!-- value 값에 따라 select에 저장됌 -->
+      <option value="꼬부기">꼬부기</option>
+      <option value="이상해씨">이상해씨</option>
+      <option value="파이리">파이리</option>
+    </select>
+    <input v-model="checked" type="checkbox"> <br>
+    <input v-model="type" value="water" type="radio" id="water"> <label for="water">물</label>
+    <input v-model="type" value="fire" type="radio" id="fire"> <label for="fire">불</label>
+    <input v-model="type" value="green" type="radio" id="green"> <label for="green">풀</label>
+  </div>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        jiwoo: {
+          pokemon: ''
+        },
+        message: '',
+        number: 0,
+        select: '',
+        checked: true,
+        type: ''
+      }
+    }) 
+  </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id='app'>
+  <input type="text" @keyup.enter="addTodo" v-model="content"><button @click="addTodo">등록</button>
+  <p><li v-for="todo in todos" :key="todo.id" >{{ todo.content }}<button style="margin-left: 4px;" @click="removeTodo(todo.id)">삭제</button></li></p>
+  </div>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        todos: [{
+          id: Date.now(),
+          content: '자바스크립트 공부',
+          completed: false
+        }],
+        content: ''
+      },
+      methods: {
+        addTodo() {
+          this.todos.push({
+            id: Date.now(),
+            content: this.content,
+            completed: false
+          })
+          this.content = ''
+        },
+        removeTodo(key) {
+          this.todos = this.todos.filter(todo => {
+            return todo.id !== key
+          })
+        }
+      },
+    })
+  </script>
+</body>
+</html>

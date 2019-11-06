@@ -32,9 +32,9 @@
     <!-- class는 true, false -->
     <!-- <h2 :class="{blue: isBlue, red: !isBlue}">TODO List</h2> -->
     <!-- style은 value 값 -->
-    <h2 :style="{color: color, 'font-size': font}">TODO List</h2>
+    <h2 :style="{color: color, 'font-size': font}">{{ time }}</h2>
     <button style="margin-right:4px" @click="allCompleted">Complete</button><button @click="clear">Clear</button><br>
-    <input type="text" v-model="newTodo" v-on:keyup.enter="addTodo"> <br>
+    <input type="text" v-model="newTodo" v-on:keyup.enter="addTodo"> <button @click="addTodo">등록</button><br>
     <select name="" v-model="status">
       <option value="all">모두 보기</option>
       <option value="active">해야할 일</option>
@@ -48,7 +48,7 @@
         <li style="list-style: none;" v-for="todo in todosByStatus" :class="{completed: todo.completed}" :key="todo.id">
             <input type="checkbox" v-model="todo.completed">
       {{ todo.content }}
-    </li>
+    </li> 
   </div>
     <!--
     <li v-else v-on:click="toggleCompleted(todo)" class="completed">
@@ -69,6 +69,7 @@
     const app = new Vue({
       el: '#app',
       data: {
+        time: '',
         color: 'pink',
         font: '30px',
         isBlue: true,
@@ -120,6 +121,10 @@
             console.log(todo.completed)
             return todo.completed === false
           })
+        },
+        updateTime() {
+          const date = new Date()
+          this.time = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
         }
       },
       computed: {
@@ -147,7 +152,13 @@
       },
       mounted: function() { // vue 시작되는 시점
         console.log('아침')
+        // 현재시간
+        this.updateTime()
         this.todos = todoStorage.fetch()
+        this.$options.myInterval = setInterval(this.updateTime, 1000)
+      },
+      beforeDestroy: function() {
+        clearInterval(this.$options.myInterval)
       }
     })
   </script>
