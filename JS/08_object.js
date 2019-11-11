@@ -29,13 +29,15 @@ let albums = {
     BTS: ['작은것들을 위한 시']
 }
 
-let bag = {
-    book,
-    albums
-}
+// let bag = {
+//     book,
+//     albums
+// }
 
 // JSON(Javaxcript object notation - 자바스크립트 오브젝트 표기법)
 // 문자열
 // object -> JSON
-let jsonData = JSON.stringify(me)
+let jsonData = JSON.stringify(albums)
 let myObject = JSON.parse(jsonData)
+typeof jsonData
+typeof myObject
